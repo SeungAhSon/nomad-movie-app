@@ -1,79 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
-//img elements must have an alt prop, either with meaningful text, or an empty string 오류
-//img 요소에는 alt가 무조건 있어야 한다
-//npm restart 하면 해결됨?
+// Function component는 return
+// Class component는 react component로부터 확장되고 render를 통해 스크린에 표시
 
-function Food({ name, picture, rating }) {
-  return (
-    <div>
-      <h2>temp {name}</h2>
-      <h4>{rating}/5.0</h4>
-      <img src={picture} style={{ width: "200px" }} alt={name} />
-    </div>
-  );
-}
+// setstate를 호출할 떄마다 react는 새로운 state와 render function을 호출한다
 
-//string, number, array, bool, func, symbol, object 등등.. 가능
-//propTypes의 명칭은 바뀌지않음
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number,
-};
-
-const foodILike = [
-  {
-    id: 1,
-    name: "Kimchi",
-    image:
-      "https://kstory365.files.wordpress.com/2015/01/kimchi-01-cabbage.jpg",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Samgyeopsal",
-    image:
-      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
-    rating: 4.9,
-  },
-  {
-    id: 3,
-    name: "Bibimbap",
-    image:
-      "https://imagesvc.meredithcorp.io/v3/mm/image?url=https://static.onecms.io/wp-content/uploads/sites/19/2012/02/07/bibimbop-ck-x.jpg",
-    rating: 4.8,
-  },
-  {
-    id: 4,
-    name: "Doncasu",
-    image:
-      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
-    rating: 5.5,
-  },
-  {
-    id: 5,
-    name: "Kimbap",
-    image:
-      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-    rating: 4.7
-  },
-];
+// class이니 this.state.count, 하지만 current.count를 사용하는게 더 좋음
+// 왜냐면 setstate는 비동기로 처리되므로, 여러번 호출하거나 다른 곳에서 동시에 변경되는 경우 처리 순서가 바뀌어 오류가 생길 수 있음 ?
+// current.count 할 떄 괄호 기억하기!!! {}할 떄 return 인지 객채인지 구분하기 위해서 ({})
 
 
-function App() {
-  return (
-    <div>
-      {foodILike.map((dish) => (
-        <Food
-          key={dish.id}
-          name={dish.name}
-          picture={dish.image}
-          rating={dish.rating}
-        />
-      ))}
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    count: 0
+  };
+
+  add = () => {
+    this.setState(current => ({ count : current.count + 1 }));
+  };
+
+  minus = () => {
+    this.setState(current => ({ count: current.count - 1 }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>The number is : {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    );
+  }
 }
 export default App;
