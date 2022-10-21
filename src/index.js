@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+//2019년 강의 기준으로 리액트는 하나의 컴포넌트만 렌더링
+//2022년 기준 React.StrictMode로 감싸면 병렬 작성 가능
+//StrictMode는 애플리케이션 내의 잠재적 문제 알아내기 위한 도구
+//import Potato from "./Potato";
+  //<React.StrictMode>
+  //  <App /> <Potato />
+  //</React.StrictMode>,
+
+ReactDOM.render(
+  <App />,
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
